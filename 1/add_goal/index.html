@@ -1,23 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <div id="app">
-        <label>Goal List</label>
-        <input v-model="enteredValue" type="text">
-        <button v-on:click="addGoal">Add Goal</button>
-    </div>
-    <ul>
-        <li v-for="goal in goals">{{goal}}</li>
-    </ul>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Basics</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://unpkg.com/vue@next" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1>Vue Course Goals</h1>
+    </header>
+    <section id="user-goal">
+      <h2>My Course Goal</h2>
+      <!-- {{}} means interpolation -->
+      <p>{{goal}}</p>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
-    <script src="app.js"></script>
+      <!-- using method -->
+      <!-- <p>{{outputGoal() }}</p> -->
+      <p v-html='outputGoal()'></p>
     
-</body>
+    <!-- vue binding syntax v-bind -->
+      <p>
+          Learn more about Laravel from
+          <a v-bind:href="link">
+            here
+          </a>
+        </p>
+    </section>
+  </body>
 </html>
