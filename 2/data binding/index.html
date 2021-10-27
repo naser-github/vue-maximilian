@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2 - Events</title>
+
+    <link rel="stylesheet" href="style.css" />
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js" defer></script> -->
+    <script src="https://unpkg.com/vue@next" defer></script>
+    <script src="app.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <h1>Events in Modifiers</h1>
+    </header>
+
+    <section id="events">
+
+        <!-- calling funtion through function -->
+        <button v-on:click='add(10)'>Add 10</button>
+        <button v-on:click.left='subtract(5)'>Subtract 5</button>
+        <p v-once>Initial: {{value}} </p>
+        <p>Result: {{value}} </p>
+
+        <!-- v-on method -->
+        <input type="text" v-bind:value='name' v-on:input="setName" v-on:keyup.enter="showName">
+        <br>
+        <br>
+        <input type="text" v-model='fullName'>
+        <br>
+        <br>
+        <button v-on:click='resetForm'>Reset</button>
+        <p>
+            Your Name : {{fullName}}
+        </p>
+
+        <!-- submit form with modifier (prevent) -->
+        <form v-on:submit.prevent="submitFormPrevent">
+            <input type="text" required>
+            <button>Sign Up</button>
+        </form>
+
+    </section>
+
+</body>
+
+</html>
