@@ -22,12 +22,14 @@
 
         <!-- calling funtion through function -->
         <button v-on:click='add(10)'>Add 10</button>
-        <button v-on:click.left='subtract(5)'>Subtract 5</button>
+        <button @:click.left='subtract(5)'>Subtract 5</button>
         <p v-once>Initial: {{value}} </p>
         <p>Result: {{value}} </p>
 
         <!-- v-on method -->
         <input type="text" v-bind:value='name' v-on:input="setName" v-on:keyup.enter="showName">
+        <!-- <v-bind:value=: value> -->
+
         <br>
         <br>
         <input type="text" v-model='fullName'>

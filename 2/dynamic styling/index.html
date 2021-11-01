@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Basics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/vue@next" defer></script>
+    <script src="app.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <h1>Vue Dynamic Styling</h1>
+    </header>
+    <section id="styling">
+        <!-- inline styling -->
+        <div class="demo" :style="{borderColor: boxA ? 'red': 'blue'}" @click='boxFunc("A")'></div>
+        <div class="demo" :style="{borderColor: boxB ? 'red': 'blue'}" @click='boxFunc("B")'></div>
+        <div class="demo" :style="{borderColor: boxC ? 'red' : 'blue'}" @click='boxFunc("C")'></div>
+
+        <!-- class styling -->
+        <div :class="boxA ? 'demo active': 'demo' " @click='boxFunc("A")'></div>
+        <div :class="{demo:true, active: boxB}" @click='boxFunc("B")'></div>
+        <div class="demo" :class="{active: boxC}" @click='boxFunc("C")'></div>
+        <div class="demo" :class="boxClass" @click='boxFunc("D")'></div>
+
+    </section>
+</body>
+
+</html>
