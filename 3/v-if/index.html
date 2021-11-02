@@ -29,7 +29,11 @@
         </p>
 
         <ul v-else>
-            <li v-for="(g, index) in goals">{{index+1}} / {{g}}</li>
+            <li v-for="(g, index) in goals" :key="g">
+                {{index+1}} / {{g}}
+                <button @click="removeGoal(index)">Remove</button>
+                <input type="text" :click.stop>
+            </li>
         </ul>
     </section>
 </body>
