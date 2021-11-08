@@ -1,44 +1,52 @@
 <template>
-    <section>
-        <ul>
-            <li>
-                <strong>{{names}} {{fav === '1'? '(Favorite)':''}}</strong>
-            </li>
+  <section>
+    <ul>
+      <li>
+        <strong
+          >Name: {{ name }} &nbsp;
+          {{ fav? "(Favourite)" : "" }}</strong
+        >
+      </li>
 
-            <button @click="toggleDetails">
-                {{showDetails? 'Hide': 'Show'}}
-            </button>
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      &nbsp; &nbsp;
 
-            <button @click="toggleFav">
-                {{fav === '1'? 'UnFav': 'Fav'}}
-            </button>
+      <button @click="toggleDetails">
+        {{ showDetails ? "Hide" : "Show" }} - Details
+      </button>
 
-            <ul v-if="showDetails">
-                <li>
-                    <strong> Phone: </strong> 
-                    {{phone}}
-                </li>
-                <li>
-                    <strong> Email: </strong> 
-                    {{email}}
-                </li>
-            </ul>
-        </ul>
-    </section>
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+
+      <button @click="toggleFav">
+        {{ fav === "1" ? "Un-Fav" : "Fav" }}
+      </button>
+
+      <ul v-if="showDetails">
+        <li>
+          <strong> Phone: </strong>
+          {{ phone }}
+        </li>
+        <li>
+          <strong> Email: </strong>
+          {{ email }}
+        </li>
+      </ul>
+    </ul>
+  </section>
 </template>
 
 <script>
  
 export default {
     // props: [
-    //     'names',
+    //     'name',
     //     'phone',
     //     'email',
     //     'isFav',
     // ],
 
     props: {
-        names: {
+        name: {
             type:String,
             required: true
         },
@@ -51,12 +59,12 @@ export default {
             required: true
         },
         isFav: {
-            type:String,
+            type:Boolean,
             required:false,
-            default: '0',
-            validator: function(value){
-                return value === "1" || value === "0";
-            }
+            default: false,
+            // validator: function(value){
+            //     return value === "1" || value === "0";
+            // }
         },
     },
     
@@ -64,12 +72,22 @@ export default {
         return {
             showDetails: false,
 
-            friend: {
-                id:'latif',
-                names:'Latif Kabir',
-                phone:'0123456789',
-                email:'latif@vue.com',
-            },
+            // friends:[
+            //     {
+            //         id: '1',
+            //         name: 'Ivan Johannes',
+            //         email: 'ij@vue.com',
+            //         phone: '12345678910'
+            //     },
+
+            //     {
+            //         id: '2',
+            //         name: 'Maya Johannes',
+            //         email: 'ij@vue.com',
+            //         phone: '12345678910'
+            //     },
+          
+            // ],
 
             fav: this.isFav,                 
         };
@@ -81,11 +99,8 @@ export default {
         },
 
         toggleFav(){
-            if(this.fav === '1'){
-                this.fav = '0';
-            }else{
-                this.fav = '1';
-            }
+            this.fav = !this.fav;
+            
         }
     }
 }

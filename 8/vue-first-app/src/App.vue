@@ -3,27 +3,46 @@
     <header>
       <h1> My Friends</h1>
     </header>
-    <friend-contect
-    name="Latif Kabir"
-    phone="12345678910"
-    email="latif@vue.com"
-    isFav = "1"
+    <friend-contact
+    v-for='friend in friends'
+    :key='friend.id'
+    :name="friend.name"
+    :phone="friend.email"
+    :email="friend.phone"
+    :isFav = "true"
     >
-    </friend-contect>
-        <friend-contect
+    <!-- </friend-contact>
+        <friend-contact
     name="Protap Kumar"
     phone="12345678910"
     email="protap@vue.com"
     isFav = "0"
-    >
-    </friend-contect>
+    > -->
+    </friend-contact>
   </section>
 </template>
 
 <script>
   export default{
     data(){
-      return
+      return {
+        friends:[
+          {
+            id: '1',
+            name: 'Ivan Johannes',
+            email: 'ij@vue.com',
+            phone: '12345678910'
+          },
+
+          {
+            id: '2',
+            name: 'Maya Johannes',
+            email: 'ij@vue.com',
+            phone: '12345678910'
+          },
+          
+        ]
+      };
     }
   }
 </script>
