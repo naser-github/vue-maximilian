@@ -6,18 +6,13 @@
     <friend-contact
     v-for='friend in friends'
     :key='friend.id'
+    :id = 'friend.id'
     :name="friend.name"
     :phone="friend.email"
     :email="friend.phone"
-    :isFav = "true"
+    :is-fav = "friend.obFav"
+    @toggle-fav="toggleIsFav"
     >
-    <!-- </friend-contact>
-        <friend-contact
-    name="Protap Kumar"
-    phone="12345678910"
-    email="protap@vue.com"
-    isFav = "0"
-    > -->
     </friend-contact>
   </section>
 </template>
@@ -31,18 +26,28 @@
             id: '1',
             name: 'Ivan Johannes',
             email: 'ij@vue.com',
-            phone: '12345678910'
+            phone: '12345678910',
+            obFav: true,
           },
-
           {
             id: '2',
             name: 'Maya Johannes',
             email: 'ij@vue.com',
-            phone: '12345678910'
-          },
-          
+            phone: '12345678910',
+            obFav: false,
+          },      
         ]
       };
+    },
+    methods: {
+      toggleIsFav(frdId){
+        const identity = this.friends.find(friend => friend.id === frdId);
+
+        identity.obFav = !identity.obFav;
+
+        alert(`this work ${identity.obFav}`)
+      }
+
     }
   }
 </script>

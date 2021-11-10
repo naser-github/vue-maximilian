@@ -4,7 +4,7 @@
       <li>
         <strong
           >Name: {{ name }} &nbsp;
-          {{ fav? "(Favourite)" : "" }}</strong
+          {{ isFav? "(Favourite)" : "" }}</strong
         >
       </li>
 
@@ -18,7 +18,7 @@
       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 
       <button @click="toggleFav">
-        {{ fav === "1" ? "Un-Fav" : "Fav" }}
+        {{ isFav? "Un-Fav" : "Fav" }}
       </button>
 
       <ul v-if="showDetails">
@@ -38,14 +38,12 @@
 <script>
  
 export default {
-    // props: [
-    //     'name',
-    //     'phone',
-    //     'email',
-    //     'isFav',
-    // ],
 
     props: {
+        id:{
+            type:String,
+            required: true
+        },
         name: {
             type:String,
             required: true
@@ -89,7 +87,7 @@ export default {
           
             // ],
 
-            fav: this.isFav,                 
+            // fav: this.isFav,                 
         };
     },
 
@@ -99,7 +97,7 @@ export default {
         },
 
         toggleFav(){
-            this.fav = !this.fav;
+            this.$emit('toggle-fav', this.id);
             
         }
     }
