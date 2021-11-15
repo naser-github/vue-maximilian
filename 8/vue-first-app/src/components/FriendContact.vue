@@ -3,8 +3,7 @@
     <ul>
       <li>
         <strong
-          >Name: {{ name }} &nbsp;
-          {{ isFav? "(Favourite)" : "" }}</strong
+          >Name: {{ name }} &nbsp; {{ isFav ? "(Favourite)" : "" }}</strong
         >
       </li>
 
@@ -18,7 +17,7 @@
       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 
       <button @click="toggleFav">
-        {{ isFav? "Un-Fav" : "Fav" }}
+        {{ isFav ? "Un-Fav" : "Fav" }}
       </button>
 
       <ul v-if="showDetails">
@@ -36,70 +35,78 @@
 </template>
 
 <script>
- 
 export default {
-
-    props: {
-        id:{
-            type:String,
-            required: true
-        },
-        name: {
-            type:String,
-            required: true
-        },
-        phone: {
-            type:String,
-            required: true
-        },
-        email: {
-            type:String,
-            required: true
-        },
-        isFav: {
-            type:Boolean,
-            required:false,
-            default: false,
-            // validator: function(value){
-            //     return value === "1" || value === "0";
-            // }
-        },
+  props: {
+    id: {
+      type: String,
+      required: true,
     },
-    
-    data(){
-        return {
-            showDetails: false,
+    name: {
+      type: String,
+      required: true,
+    },
+    phone: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+    },
+    isFav: {
+      type: Boolean,
+      required: false,
+      default: false,
+      // validator: function(value){
+      //     return value === "1" || value === "0";
+      // }
+    },
+  },
 
-            // friends:[
-            //     {
-            //         id: '1',
-            //         name: 'Ivan Johannes',
-            //         email: 'ij@vue.com',
-            //         phone: '12345678910'
-            //     },
+  emit: {
+    'toggle-fav': function(id){
+      if(id){
+        return true;
+      }else{
+        console.log('Id id missing');
+        return false
+      }
+    },
+  },
 
-            //     {
-            //         id: '2',
-            //         name: 'Maya Johannes',
-            //         email: 'ij@vue.com',
-            //         phone: '12345678910'
-            //     },
-          
-            // ],
+  data() {
+    return {
+      showDetails: false,
 
-            // fav: this.isFav,                 
-        };
+      // friends:[
+      //     {
+      //         id: '1',
+      //         name: 'Ivan Johannes',
+      //         email: 'ij@vue.com',
+      //         phone: '12345678910'
+      //     },
+
+      //     {
+      //         id: '2',
+      //         name: 'Maya Johannes',
+      //         email: 'ij@vue.com',
+      //         phone: '12345678910'
+      //     },
+
+      // ],
+
+      // fav: this.isFav,
+    };
+  },
+
+  methods: {
+    toggleDetails() {
+      this.showDetails = !this.showDetails;
     },
 
-    methods: {
-        toggleDetails(){
-            this.showDetails = !this.showDetails;
-        },
-
-        toggleFav(){
-            this.$emit('toggle-fav', this.id);
-            
-        }
-    }
-}
+    toggleFav() {
+      this.$emit("toggle-fav", this.id);
+    },
+  },
+};
 </script>
