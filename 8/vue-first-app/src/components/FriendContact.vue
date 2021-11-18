@@ -29,6 +29,7 @@
           <strong> Email: </strong>
           {{ email }}
         </li>
+        <button @click="deleteFriend" >Delete</button>
       </ul>
     </ul>
   </section>
@@ -63,16 +64,18 @@ export default {
     },
   },
 
-  emit: {
-    'toggle-fav': function(id){
-      if(id){
-        return true;
-      }else{
-        console.log('Id id missing');
-        return false
-      }
-    },
-  },
+  emit : ['toggle-fav', 'delete-friend'],
+
+  // emit: {
+  //   'toggle-fav': function(id){
+  //     if(id){
+  //       return true;
+  //     }else{
+  //       console.warn('Id id missing');
+  //       return false
+  //     }
+  //   },
+  // },
 
   data() {
     return {
@@ -107,6 +110,10 @@ export default {
     toggleFav() {
       this.$emit("toggle-fav", this.id);
     },
+
+    deleteFriend(){
+      this.$emit('delete-friend', this.id);
+    }
   },
 };
 </script>

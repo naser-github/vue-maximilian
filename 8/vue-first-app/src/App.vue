@@ -3,6 +3,11 @@
     <header>
       <h1> My Friends</h1>
     </header>
+    <form-contact
+    @add-contact = "saveData"
+    >
+
+    </form-contact>
     <friend-contact
     v-for='friend in friends'
     :key='friend.id'
@@ -12,6 +17,7 @@
     :email="friend.phone"
     :is-fav = "friend.obFav"
     @toggle-fav="toggleIsFav"
+    @delete-friend = "deleteFriend"
     >
     </friend-contact>
   </section>
@@ -46,6 +52,25 @@
         identity.obFav = !identity.obFav;
 
         alert(`this work ${identity.obFav}`)
+      },
+
+      saveData(name, email, phone){
+
+        console.log(Object.keys(this.friends).length + 1);
+        
+        const newFriend = {
+          id: Object.keys(this.friends).length+1,
+          name : name,
+          email : email,
+          phone : phone,
+          obFav: true,
+        }
+
+        this.friends.push(newFriend);
+      },
+
+      deleteFriend(id){
+        this.friends = this.friends.filter( friend => friend.id != id);
       }
 
     }
@@ -83,7 +108,8 @@ header {
   list-style: none;
 }
 
-#app li {
+#app li,
+#app form {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   margin: 1rem auto;
   border-radius: 10px;
@@ -116,5 +142,7 @@ header {
   border-color: #ec3169;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.26);
 }
+
+
 
 </style>
