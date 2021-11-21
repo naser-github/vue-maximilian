@@ -29,7 +29,7 @@
           <strong> Email: </strong>
           {{ email }}
         </li>
-        <button @click="deleteFriend" >Delete</button>
+        <button @click="deleteFriend">Delete</button>
       </ul>
     </ul>
   </section>
