@@ -11,7 +11,7 @@
     </ul>
   </section>
 </template>
-
+ 
 <style>
 section h2 {
   margin: 0.5rem 0;

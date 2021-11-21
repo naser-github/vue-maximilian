@@ -14,7 +14,7 @@
     background-color: #14005e;
   }
 
-  header h1 {
+  header h1 { 
     color: white;
     margin: 0;
   }

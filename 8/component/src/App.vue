@@ -59,7 +59,7 @@ export default {
         })
       }, 3000);
   },
-
+ 
 };
 </script>
 

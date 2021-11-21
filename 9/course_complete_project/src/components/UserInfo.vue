@@ -16,7 +16,7 @@
 export default({
     props: ['fullName', 'infoText', 'role'],
 })
-</script>
+</script> 
 
 <style>
 section {
