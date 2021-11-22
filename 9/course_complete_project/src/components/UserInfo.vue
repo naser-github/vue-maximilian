@@ -1,13 +1,20 @@
 <template>
     <section>
-        <div>
-        <h3> {{fullName}} </h3>
-        <base-badge
-        :type="role"
-        :caption="role.toUpperCase()"
-        ></base-badge>
-        </div>
-        <p> {{infoText}} </p>
+      <base-card>
+        <template v-slot:slotted >
+          <div>
+            <h3> {{fullName}} </h3>
+            <base-badge
+            :type="role"
+            :caption="role.toUpperCase()"
+            ></base-badge>
+          </div>
+        </template>
+
+        <template v-slot:default>
+          <p> {{infoText}} </p>
+        </template>
+      </base-card>
     </section>
 </template>
 
