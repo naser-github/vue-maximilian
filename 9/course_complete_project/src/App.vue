@@ -19,7 +19,7 @@ import UserInfo from './components/UserInfo.vue';
 export default {
   components: {
     'the-header' : TheHeader, 
-    BadgeList,
+    BadgeList, // Vue automatically changes BadgeList to badge-list
     UserInfo
   },
   data() {

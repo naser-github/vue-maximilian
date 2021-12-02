@@ -4,5 +4,5 @@
         <slot name="header"></slot>
     </body>
 
-    <slot></slot>
+    <slot></slot> 
 </template>

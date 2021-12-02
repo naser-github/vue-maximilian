@@ -24,7 +24,7 @@ export default({
     props: ['fullName', 'infoText', 'role'],
 })
 </script> 
-
+ 
 <style>
 section {
   margin: 2rem auto;
