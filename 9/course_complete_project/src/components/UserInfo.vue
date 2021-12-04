@@ -25,7 +25,7 @@ export default({
 })
 </script> 
  
-<style>
+<style scoped>
 section {
   margin: 2rem auto;
   max-width: 30rem;
