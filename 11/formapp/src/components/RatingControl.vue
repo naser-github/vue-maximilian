@@ -1,15 +1,15 @@
 <template>
   <ul>
     <li>
-      <button :class="{active: activeOption === 'poor'}" type="button" @click="activate('poor')">Poor</button>
+      <button :class="{active: rating === 'poor'}" type="button" @click="activate('poor')">Poor</button>
     </li>
 
     <li>
-      <button :class="{active: activeOption === 'average'}" type="button" @click="activate('average')">Average</button>
+      <button :class="{active: rating === 'average'}" type="button" @click="activate('average')">Average</button>
     </li>
 
     <li>
-      <button :class="{active: activeOption === 'great'}" type="button" @click="activate('great')">Great</button>
+      <button :class="{active: rating === 'great'}" type="button" @click="activate('great')">Great</button>
     </li>
   </ul>
 </template> 
@@ -18,11 +18,17 @@
 export default {
   props: ['rating'],
   emits: ['update:modelValue'],
-  data() {
-    return {
-      activeOption: this.rating,
-    };
-  },
+  // data() {
+  //   return {
+  //     activeOption: this.rating,
+  //   };
+  // },
+
+  // computed: {
+  //   activeOption(){
+  //     return this.modelValue;
+  //   }
+  // },
 
   methods: {
     activate(opt) {

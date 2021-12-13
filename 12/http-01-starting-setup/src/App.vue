@@ -16,7 +16,7 @@ export default {
     return {
       savedSurveyResults: [],
     };
-  },
+  }, 
   methods: {
     storeSurvey(surveyData) {
       const surveyResult = {

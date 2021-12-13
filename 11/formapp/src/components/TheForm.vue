@@ -133,7 +133,7 @@ export default {
       this.interest = null;
       this.how = null;
       this.confirm = false;
-
+      this.rating =  null;
     },
   },
 };
