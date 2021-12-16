@@ -13,16 +13,16 @@
       </ul>
     </nav>
   </header>
-</template>
+</template> 
 
 <script>
 export default {
-  // emits: ['set-page'],
-  methods: {
-    setActivePage(page) {
-      this.$emit('set-page', page);
-    },
-  },
+//   emits: ['set-page'],
+//   methods: {
+//     setActivePage(page) {
+//       this.$emit('set-page', page);
+//     },
+//   },
 };
 </script>
 
@@ -62,7 +62,8 @@ a {
 }
 
 a:hover,
-a:active {
+a:active,
+a.activate{
   color: #f1a80a;
   border-color: #f1a80a;
   background-color: #1a037e;
