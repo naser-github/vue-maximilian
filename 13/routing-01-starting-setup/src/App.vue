@@ -14,9 +14,7 @@ import TheNavigation from './components/nav/TheNavigation.vue';
 
 export default {
   components: {
-    TheNavigation,
-    // TeamsList,
-    // UsersList,
+    TheNavigation
   },
   data() {
     return {
@@ -41,11 +39,7 @@ export default {
       users: this.users,
     };
   },
-  methods: {
-    // setActivePage(page) {
-    //   this.activePage = page;
-    // },
-  },
+  
 };
 </script>
 

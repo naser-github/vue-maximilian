@@ -23,7 +23,7 @@ export default {
     return {
       teamName: 'Test',
       members: [
-        { id: 'u1', fullName: 'Max Schwarz', role: 'Engineer' },
+        { id: 'u1', fullName: 'Hanzo', role: 'Software Engineer' },
         { id: 'u2', fullName: 'Max Schwarz', role: 'Engineer' },
       ],
     };
