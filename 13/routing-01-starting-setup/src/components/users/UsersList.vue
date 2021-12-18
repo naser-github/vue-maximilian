@@ -3,6 +3,7 @@
   <ul>
     <user-item v-for="user in users" :key="user.id" :name="user.fullName" :role="user.role"></user-item>
   </ul>
+
 </template>
 
 <script>
@@ -16,8 +17,9 @@ export default {
 
   methods: {
     confirmInput(){
-     this.$router.push('/teams') ;
-     this.$router.push('/ users') ;
+      this.$router.push('/teams') ;
+      // this.$router.push('/ users') ;
+      
     }
   },
 };
