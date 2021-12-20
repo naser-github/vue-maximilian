@@ -9,7 +9,7 @@
         :role="member.role"
       ></user-item>
     </ul>
-    <router-link :to="'/teams/t2'">Go to link 2</router-link>
+    <router-link :to="'/teams/t2'">Go to Team 2</router-link>
   </section>
 </template>
 
@@ -22,6 +22,7 @@ export default {
   },
 
   inject: ['teams', 'users'],
+  props: ['teamId'],
 
   data() {
     return {
@@ -31,13 +32,29 @@ export default {
   },
 
   created() {
-    this.visit(this.$route);
+    // this.visit(this.$route);
+    this.visiting(this.teamId);
+    console.log(this.$route.query);
   },
 
   methods:{
-    visit(route){
-      console.log(route);
-      const teamId = route.params.teamId;
+    // visit(route){
+    //   // console.log(route);
+    //   const teamId = route.params.teamId;
+    //   const selectedTeam = this.teams.find(team => team.id === teamId);
+    //   const members = selectedTeam.members;
+    //   const selectedMembers = [];
+    //   for ( let member of members ){
+    //     const selectedUser = this.users.find(user => user.id === member);
+    //     selectedMembers.push(selectedUser);
+    //   }
+
+    //   this.teamName = selectedTeam.name;
+    //   this.members = selectedMembers;
+    // },
+
+    visiting(teamId){
+
       const selectedTeam = this.teams.find(team => team.id === teamId);
       const members = selectedTeam.members;
       const selectedMembers = [];
@@ -52,9 +69,18 @@ export default {
   },
 
   watch:{
-    $route(newRoute){
-      this.visit(newRoute);
-    }
+    // $route(newRoute){
+    //   this.visit(newRoute);
+    // },
+    teamId(newTeamId){
+      this.visiting(newTeamId);
+    },
+  },
+
+  beforeRouteUpdate (to, from, next) {
+    console.log('CMP Teammember - before route update');
+    console.log(to, from);
+    next();
   }
 };
 </script>

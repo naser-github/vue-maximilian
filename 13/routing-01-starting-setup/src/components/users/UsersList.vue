@@ -22,6 +22,18 @@ export default {
       
     }
   },
+
+  beforeRouteEnter (to, from, next) {
+    console.log('User list cmp Before Next');
+    console.log(to, from);
+    next();
+  },
+
+  beforeRouteLeave (to, from, next) {
+    console.log('User list cmp Before Leave');
+    console.log(to, from);
+    next();
+  },
 };
 </script>
 
