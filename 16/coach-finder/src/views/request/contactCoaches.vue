@@ -43,7 +43,7 @@ export default {
         email: this.email,
         message: this.message,
       };
-      console.log(formData);
+      this.$store.dispatch('requests/addRequest',formData)
     },
   },
 };
