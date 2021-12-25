@@ -5,10 +5,15 @@
   <section>
     <base-card>
       <div class="controls">
-        <base-button mode="outline">Refresh</base-button>
-        <base-button link :to="'register'"> Register </base-button>
+        <base-button mode="outline" @click="loadData">Refresh</base-button>
+        <base-button link :to="'register'" v-if="!isLoading">
+          Register
+        </base-button>
       </div>
-      <ul v-if="coachExist">
+      <div v-if="isLoading">
+        <base-spinner></base-spinner>
+      </div>
+      <ul v-else-if="coachExist">
         <coach-item
           v-for="coach in getCoachList"
           :key="coach.id"
@@ -37,6 +42,8 @@ export default {
 
   data() {
     return {
+      isLoading: false,
+      error: null,
       activeFilters: {
         frontend: true,
         backend: true,
@@ -47,8 +54,7 @@ export default {
 
   computed: {
     coachExist() {
-      return this.$store.getters["coaches/coachExist"];
-
+      return !this.isLoading && this.$store.getters["coaches/coachExist"];
     },
     getCoachList() {
       const coaches = this.$store.getters["coaches/coachList"];
@@ -69,6 +75,20 @@ export default {
     setFilter(updatedFilter) {
       this.activeFilters = updatedFilter;
     },
+    async loadData() {
+      this.isLoading = true;
+      try{
+        await this.$store.dispatch("coaches/loadCoaches");
+      }catch(error){
+        this.error.message || 'Something went actually'
+      }
+      
+      this.isLoading = false;
+    },
+  },
+
+  created() {
+    this.loadData();
   },
 };
 </script>

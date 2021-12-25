@@ -15,8 +15,14 @@ export default {
     },
   },
   getters: {
-    showRequests(state) {
-      state.requests;
+    reqExist(_, getters) {
+      if (getters.showRequests && getters.showRequests.length > 0) return true;
+      else return false;
+    },
+    // state, getters, rootState, rootGetters
+    showRequests(state, _, _2, rootGetters) {
+      const userId = rootGetters.getUserId;
+      return state.requests.filter((req) => req.coachId == userId);
     },
   },
   mutations: {

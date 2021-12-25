@@ -40,10 +40,12 @@ export default {
       }
 
       const formData = {
+        coachId: this.$route.params.id,
         email: this.email,
         message: this.message,
       };
-      this.$store.dispatch('requests/addRequest',formData)
+      this.$store.dispatch("requests/addRequest", formData);
+      this.$router.replace("/coaches");
     },
   },
 };

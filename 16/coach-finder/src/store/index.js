@@ -10,11 +10,15 @@ const store = createStore({
   },
   state() {
     return {
-      userId:1,
+      userId: 1,
     };
   },
   actions: {},
-  getters: {},
+  getters: {
+    getUserId(state) {
+      return state.userId;
+    },
+  },
   mutations: {},
 });
 

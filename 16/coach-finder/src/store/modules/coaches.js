@@ -26,9 +26,9 @@ export default {
     };
   },
   actions: {
-    registerCoach(context, data) {
-      let count = context.getters["getCounter"]+1;
-      
+    async registerCoach(context, data) {
+      let count = context.getters["getCounter"] + 1;
+      const userId = context.rootGetters.getUserId;
       const coachData = {
         id: count,
         firstName: data.firstName,
@@ -38,8 +38,52 @@ export default {
         hourlyRate: data.rate,
       };
 
+      const response = await fetch(
+        `https://coach-find-2ebf5-default-rtdb.firebaseio.com/coaches/${userId}.json`,
+        {
+          method: "Put",
+          body: JSON.stringify(coachData),
+        }
+      );
+
+      // const responseData = await response.json();
+
+      if (!response.ok) {
+        console.log("updated");
+      }
+
       context.commit("registerCoach", coachData);
       context.commit("increaseCount", count);
+    },
+
+    async loadCoaches(context) {
+      const data = await fetch(
+        `https://coach-find-2ebf5-default-rtdb.firebaseio.com/coaches.json`
+      );
+
+      if (!data.ok) {
+        const error = new Error(responseData.message || "Failed to fetch");
+        throw error;
+      }
+
+      const responseData = await data.json();
+
+      const coaches = [];
+
+      for (const key in responseData) {
+        if (responseData[key]) {
+          const coach = {
+            id: responseData[key].id,
+            firstName: responseData[key].firstName,
+            lastName: responseData[key].lastName,
+            description: responseData[key].description,
+            hourlyRate: responseData[key].hourlyRate,
+            areas: responseData[key].areas,
+          };
+          coaches.push(coach);
+        }
+      }
+      context.commit("setCoaches", coaches);
     },
   },
   getters: {
@@ -62,6 +106,9 @@ export default {
     registerCoach(state, payload) {
       console.log(payload);
       state.coaches.push(payload);
+    },
+    setCoaches(state, payload) {
+      state.coaches = payload;
     },
   },
 };

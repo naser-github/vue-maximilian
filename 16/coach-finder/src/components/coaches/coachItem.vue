@@ -1,7 +1,7 @@
 <template>
   <li>
     <h3>{{ fullName }}</h3>
-    <h4>${{ hourlyRate }}</h4>
+    <h4>${{ hourlyRate }} / Hour</h4>
     <div>
       <base-badge
         v-for="area in areas"
