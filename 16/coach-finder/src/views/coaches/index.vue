@@ -3,7 +3,7 @@
     :show="!!error"
     title="An error occurred"
     @close="handleErrorMethod"
-  >
+  > 
     <p>{{ error }}</p>
   </base-dialogue>
   <section>
