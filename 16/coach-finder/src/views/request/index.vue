@@ -1,10 +1,20 @@
 <template>
+  <base-dialogue
+    :show="!!error"
+    title="An error occurred"
+    @close="handleErrorMethod"
+  >
+    <p>{{ error }}</p>
+  </base-dialogue>
   <section>
     <base-card>
       <header>
         <h2>Request Received</h2>
       </header>
-      <ul v-if="reqExist">
+      <div v-if="isLoading">
+        <base-spinner></base-spinner>
+      </div>
+      <ul v-else-if="reqExist && !isLoading">
         <requested-items
           v-for="req in getRequests"
           :key="req.id"
@@ -25,7 +35,9 @@ export default {
     RequestedItems,
   },
   data() {
-    return {};
+    return {
+      isLoading: false,
+    };
   },
   computed: {
     reqExist() {
@@ -34,6 +46,23 @@ export default {
     getRequests() {
       return this.$store.getters["requests/showRequests"];
     },
+  },
+  methods: {
+    async loadRequest() {
+      this.isLoading = true;
+      try {
+        await this.$store.dispatch("requests/fetchRequests");
+      } catch (error) {
+        this.error = error.message || "something failed!";
+      }
+      this.isLoading = false;
+    },
+    handleErrorMethod() {
+      this.error = null;
+    },
+  },
+  created() {
+    this.loadRequest();
   },
 };
 </script>

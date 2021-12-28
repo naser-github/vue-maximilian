@@ -10,8 +10,8 @@
       <label for="backend">Backend</label>
     </span>
     <span class="filter-option">
-      <input type="checkbox" id="devops" checked @change="filterCoaches" />
-      <label for="devops">Devops</label>
+      <input type="checkbox" id="devOps" checked @change="filterCoaches" />
+      <label for="devOps">Devops</label>
     </span>
   </base-card>
 </template>
@@ -24,7 +24,7 @@ export default {
       filterType: {
         frontend: true,
         backend: true,
-        devops: true,
+        devOps: true,
       },
     };
   },

@@ -2,33 +2,16 @@ export default {
   namespaced: true,
   state() {
     return {
-      counter: 2,
-      coaches: [
-        {
-          id: "1",
-          firstName: "Latif",
-          lastName: "Kabir",
-          areas: ["frontend", "backend", "devOps"],
-          description:
-            "I'm Latif & I've worked as a developer for years. Let me help you become a developer as well!",
-          hourlyRate: 60,
-        },
-        {
-          id: "2",
-          firstName: "Protap",
-          lastName: "Saha",
-          areas: ["backend", "devOps"],
-          description:
-            "I am Protap & I've worked as a developer for years. Let me help you become a developer as well!",
-          hourlyRate: 30,
-        },
-      ],
+      counter: 0,
+      lastFetch: null,
+      coaches: [],
     };
   },
   actions: {
     async registerCoach(context, data) {
       let count = context.getters["getCounter"] + 1;
       const userId = context.rootGetters.getUserId;
+      // const userId = 4;
       const coachData = {
         id: count,
         firstName: data.firstName,
@@ -49,25 +32,28 @@ export default {
       // const responseData = await response.json();
 
       if (!response.ok) {
-        console.log("updated");
+        console.log("error");
       }
 
       context.commit("registerCoach", coachData);
       context.commit("increaseCount", count);
     },
 
-    async loadCoaches(context) {
+    async loadCoaches(context, payload) {
+      if(!payload.forcedRefresh && !context.getters.shouldUpdate){
+        return;
+      }
       const data = await fetch(
         `https://coach-find-2ebf5-default-rtdb.firebaseio.com/coaches.json`
       );
 
       if (!data.ok) {
-        const error = new Error(responseData.message || "Failed to fetch");
+        const error = new Error(data.message || "Failed to fetch coach data");
+        console.log(error);
         throw error;
       }
 
       const responseData = await data.json();
-
       const coaches = [];
 
       for (const key in responseData) {
@@ -84,6 +70,7 @@ export default {
         }
       }
       context.commit("setCoaches", coaches);
+      context.commit("setFetchTimestamp");
     },
   },
   getters: {
@@ -98,17 +85,29 @@ export default {
     coachList(state) {
       return state.coaches;
     },
+
+    shouldUpdate(state) {
+      const lastFetchTime = state.lastFetch;
+      if (!lastFetchTime) {
+        return true;
+      }
+      const currentTime = new Date().getTime();
+      return (currentTime - lastFetchTime) / 1000 > 60;
+    },
   },
   mutations: {
     increaseCount(state, payload) {
       state.counter = payload;
     },
     registerCoach(state, payload) {
-      console.log(payload);
       state.coaches.push(payload);
     },
     setCoaches(state, payload) {
       state.coaches = payload;
+    },
+
+    setFetchTimestamp(state) {
+      state.lastFetch = new Date().getTime();
     },
   },
 };

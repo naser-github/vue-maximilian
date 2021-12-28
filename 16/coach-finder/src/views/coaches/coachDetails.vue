@@ -35,7 +35,7 @@ export default {
     },
     contactCoach() {
       // return { name: "contact", params: this.id };
-      return this.$route.path + "/" + this.id + "/contact";
+      return this.$route.path + "/contact";
     },
   },
   created() {

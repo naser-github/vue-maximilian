@@ -1,11 +1,18 @@
 <template>
+  <base-dialogue
+    :show="!!error"
+    title="An error occurred"
+    @close="handleErrorMethod"
+  >
+    <p>{{ error }}</p>
+  </base-dialogue>
   <section>
     <coach-filter @change-filter="setFilter"></coach-filter>
   </section>
   <section>
     <base-card>
       <div class="controls">
-        <base-button mode="outline" @click="loadData">Refresh</base-button>
+        <base-button mode="outline" @click="loadData(true)">Refresh</base-button>
         <base-button link :to="'register'" v-if="!isLoading">
           Register
         </base-button>
@@ -34,6 +41,7 @@
 <script>
 import CoachItem from "../../components/coaches/coachItem.vue";
 import CoachFilter from "../../components/coaches/coachFilter.vue";
+
 export default {
   components: {
     CoachItem,
@@ -47,7 +55,7 @@ export default {
       activeFilters: {
         frontend: true,
         backend: true,
-        devops: true,
+        devOps: true,
       },
     };
   },
@@ -64,7 +72,7 @@ export default {
           return true;
         if (this.activeFilters.backend && coach.areas.includes("backend"))
           return true;
-        if (this.activeFilters.devops && coach.areas.includes("devops"))
+        if (this.activeFilters.devOps && coach.areas.includes("devOps"))
           return true;
         return false;
       });
@@ -72,18 +80,24 @@ export default {
   },
 
   methods: {
+
     setFilter(updatedFilter) {
       this.activeFilters = updatedFilter;
     },
-    async loadData() {
+
+    async loadData(refresh = false) {
       this.isLoading = true;
-      try{
-        await this.$store.dispatch("coaches/loadCoaches");
-      }catch(error){
-        this.error.message || 'Something went actually'
+      try {
+        await this.$store.dispatch("coaches/loadCoaches", {forcedRefresh: refresh});
+      } catch (error) {
+        this.error = error.message || "Something went wrong";
+        console.log('Error:',this.error);
       }
-      
       this.isLoading = false;
+    },
+
+    handleErrorMethod() {
+      this.error = null;
     },
   },
 
