@@ -11,7 +11,8 @@ export default {
     async registerCoach(context, data) {
       let count = context.getters["getCounter"] + 1;
       const userId = context.rootGetters.getUserId;
-      // const userId = 4;
+      const token = context.rootGetters.getToken;
+
       const coachData = {
         id: count,
         firstName: data.firstName,
@@ -21,8 +22,10 @@ export default {
         hourlyRate: data.rate,
       };
 
+      console.log('Token:',token);
       const response = await fetch(
-        `https://coach-find-2ebf5-default-rtdb.firebaseio.com/coaches/${userId}.json`,
+        `https://coach-find-2ebf5-default-rtdb.firebaseio.com/coaches/${userId}.json?auth=` +
+          token,
         {
           method: "Put",
           body: JSON.stringify(coachData),
@@ -40,7 +43,7 @@ export default {
     },
 
     async loadCoaches(context, payload) {
-      if(!payload.forcedRefresh && !context.getters.shouldUpdate){
+      if (!payload.forcedRefresh && !context.getters.shouldUpdate) {
         return;
       }
       const data = await fetch(
