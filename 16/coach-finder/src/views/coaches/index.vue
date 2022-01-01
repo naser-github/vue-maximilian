@@ -13,7 +13,8 @@
     <base-card>
       <div class="controls">
         <base-button mode="outline" @click="loadData(true)">Refresh</base-button>
-        <base-button link :to="'register'" v-if="!isLoading">
+        <base-button link to="/user-auth?redirect=register" v-if="!isAuth">Log in</base-button>
+        <base-button link :to="'register'" v-if="!isLoading && isAuth">
           Register
         </base-button>
       </div>
@@ -77,6 +78,10 @@ export default {
         return false;
       });
     },
+    isAuth(){
+      console.log('isAuth:');
+      return this.$store.getters.isAuth;
+    }
   },
 
   methods: {

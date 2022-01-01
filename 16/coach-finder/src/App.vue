@@ -12,6 +12,19 @@ export default {
   components: {
     TheHeader,
   },
+  computed: {
+    isAutoLogout() {
+      return this.$store.getters.isAutoLogout;
+    },
+  },
+  created() {
+    this.$store.dispatch("checkLogin");
+  },
+  watch: {
+    isAutoLogout(curVal, oldVal) {
+      if (curVal && curVal != oldVal) this.$router.replace("/coaches");
+    },
+  },
 };
 </script>
 

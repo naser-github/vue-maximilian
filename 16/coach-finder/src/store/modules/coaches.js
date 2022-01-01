@@ -14,7 +14,7 @@ export default {
       const token = context.rootGetters.getToken;
 
       const coachData = {
-        id: count,
+        id: userId,
         firstName: data.firstName,
         lastName: data.lastName,
         areas: data.areas,

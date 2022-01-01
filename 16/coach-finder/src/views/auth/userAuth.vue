@@ -42,7 +42,7 @@ export default {
   },
 
   methods: {
-    submitForm() {
+    async submitForm() {
       this.isValid = true;
 
       if (
@@ -54,18 +54,23 @@ export default {
         return;
       }
 
-      if (this.mode === "login") {
-        this.$store.dispatch("login", {
-          email: this.email,
-          password: this.password,
-        });
-      }
+      try {
+        if (this.mode === "login") {
+          await this.$store.dispatch("login", {
+            email: this.email,
+            password: this.password,
+          });
+        } else {
+          this.$store.dispatch("signUp", {
+            email: this.email,
+            password: this.password,
+          });
+        }
+        const redirectUrl = "/" + (this.$route.query.redirect || "coaches");
 
-      if (this.mode === "signUp") {
-        this.$store.dispatch("signUp", {
-          email: this.email,
-          password: this.password,
-        });
+        this.$router.replace(redirectUrl);
+      } catch (err) {
+        this.error = err.message || "Failed to authenticate";
       }
     },
     signUp() {

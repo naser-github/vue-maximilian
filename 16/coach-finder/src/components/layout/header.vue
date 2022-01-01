@@ -1,19 +1,48 @@
 <template>
   <header>
     <h1>
-      <router-link to="/" style="padding-right:200px;"> Coach Tracker </router-link>
+      <router-link to="/" style="padding-right: 200px">
+        Coach Tracker
+      </router-link>
     </h1>
 
     <ul>
       <li>
         <router-link :to="'coaches'">Coach List </router-link>
       </li>
-      <li>
+
+      <li v-if="isAuth">
         <router-link :to="'request'">Request </router-link>
+      </li>
+
+      <li v-else>
+        <router-link :to="{ name: 'auth' }">Login </router-link>
+      </li>
+
+      <li v-if="isAuth">
+        <base-button @click="logout"> Logout </base-button>
       </li>
     </ul>
   </header>
 </template>
+
+<script>
+
+export default {
+  computed: {
+    isAuth() {
+      return this.$store.getters.isAuth;  
+    },
+  },
+  methods:{
+    logout(){
+      this.$store.dispatch('logout');
+      this.$router.replace("/");
+    }
+  }
+};
+</script>
+
 
 <style scoped>
 header {
